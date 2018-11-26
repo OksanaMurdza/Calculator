@@ -3,12 +3,15 @@ package calculator;
 public class Calculator implements ExpressionCalculator {
 
     private String str;
-    private int leng;
-
 
     public boolean isExpressionValid(String expression) {
         int num = 0;
+        str = expression;
+        int leng = str.length();
         for (int i=0; i<leng; i++){
+            if (str.charAt(i) == '-' || str.charAt(i) == '+' || str.charAt(i) == '*' || str.charAt(i) == '/') {
+                if (str.charAt(i+1) == '-' || str.charAt(i+1) == '+' || str.charAt(i+1) == '*' || str.charAt(i+1) == '/') return false;
+            }
             if (str.charAt(i) == ')') num--;
             if (str.charAt(i) == '(') num++;
         }
@@ -18,6 +21,7 @@ public class Calculator implements ExpressionCalculator {
     public double calculateExpression(String expression) throws IllegalArgumentException{
         if (!isExpressionValid(expression))
             throw new IllegalArgumentException();
+        str = expression;
         double result=0;
         if (str.startsWith("(") && str.endsWith(")")) {
             return calculateExpression(str.substring(1, str.length() - 1));
@@ -53,6 +57,7 @@ public class Calculator implements ExpressionCalculator {
                     if (operator == '*' || operator == '/') {
                         position++;
                         int tmpPosition = position;
+
                         while (position < str.length()) {
                             if (Character.isDigit(str.charAt(position)) || str.charAt(position) == '.') {
                                 position++;
@@ -72,8 +77,6 @@ public class Calculator implements ExpressionCalculator {
                     }
 
                 }
-
-
             }
         }
         return result;
