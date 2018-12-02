@@ -10,10 +10,16 @@ public class Calculator implements ExpressionCalculator {
                 return false;
             }
             if (expression.charAt(i) == '(') {
+                if (expression.charAt(i+1) == ')'){
+                    return false;
+                }
                 num++;
             }
 
             if (expression.charAt(i) == ')') {
+                if (expression.charAt(i+1) == '('){
+                    return false;
+                }
                 if (num > 0) {
                     num--;
                 } else {
@@ -42,6 +48,9 @@ public class Calculator implements ExpressionCalculator {
                         if (i == expression.length() - 1) {
                             i--;
                             break;
+                        }
+                        if (expression.charAt(i+1) == '(') {
+                            return false;
                         }
                     } else {
                         if (numPoint > 1) {
@@ -91,6 +100,7 @@ public class Calculator implements ExpressionCalculator {
             if (expression.charAt(0) == '+') {
                 position++;
             }
+
 
 
             while (position < expression.length()) {
