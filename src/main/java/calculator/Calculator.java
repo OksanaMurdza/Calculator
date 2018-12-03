@@ -10,14 +10,14 @@ public class Calculator implements ExpressionCalculator {
                 return false;
             }
             if (expression.charAt(i) == '(') {
-                if (expression.charAt(i+1) == ')'){
+                if (expression.charAt(i+1) == ')' || expression.charAt(i+1) == '.'){
                     return false;
                 }
                 num++;
             }
 
             if (expression.charAt(i) == ')') {
-                if (expression.charAt(i+1) == '('){
+                if (expression.charAt(i+1) == '(' || expression.charAt(i+1) == '.'){
                     return false;
                 }
                 if (num > 0) {
@@ -64,7 +64,8 @@ public class Calculator implements ExpressionCalculator {
             if (expression.charAt(i) == '-' || expression.charAt(i) == '+' ||
                     expression.charAt(i) == '*' || expression.charAt(i) == '/') {
                 if (expression.charAt(i + 1) == '-' || expression.charAt(i + 1) == '+'
-                        || expression.charAt(i + 1) == '*' || expression.charAt(i + 1) == '/') {
+                        || expression.charAt(i + 1) == '*' || expression.charAt(i + 1) == '/'
+                        || expression.charAt(i+1) == '.') {
                     return false;
                 }
             }
